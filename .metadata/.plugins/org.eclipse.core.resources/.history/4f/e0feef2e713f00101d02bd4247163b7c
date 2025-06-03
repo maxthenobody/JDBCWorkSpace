@@ -1,0 +1,11 @@
+package com.kh.model.vo;
+
+/*
+ * VO(Value Object)
+ * - DB 테이블의 한 행의 정보를 보관할 저장용 객체.
+ * - DTO와 비슷한 개념으로 사용된다.
+ * 
+ * */
+public class Member {
+
+}

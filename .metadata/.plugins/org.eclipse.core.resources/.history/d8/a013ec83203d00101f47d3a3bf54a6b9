@@ -1,0 +1,16 @@
+package com.kh.chap02_crud;
+
+public class Crud {
+	public static void main(String[] args) {
+		Crud c = new Crud();
+	}
+	
+	public void insert() {
+		// 1) Driver 등록
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}

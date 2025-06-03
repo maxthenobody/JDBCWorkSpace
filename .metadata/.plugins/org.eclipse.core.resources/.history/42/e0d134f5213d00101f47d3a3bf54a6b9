@@ -1,0 +1,26 @@
+package com.kh.chap02_crud;
+
+import java.sql.DriverManager;
+
+public class Crud {
+	public static void main(String[] args) {
+		Crud c = new Crud();
+	}
+	
+	public void insert() {
+		try {
+			// 1) Driver 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			// 2) DBMS와 연결
+			DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe",
+					"c##jdbc",
+					"jdbc"
+					);
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}

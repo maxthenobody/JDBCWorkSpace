@@ -1,0 +1,82 @@
+package com.kh.chap02_crud;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Crud {
+	public static void main(String[] args) {
+		Crud c = new Crud();
+		c.insert();
+	}
+	
+	public void insert() {
+		try {
+			// 1) Driver 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			// 2) DBMS와 연결
+			Connection conn = DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe",
+					"c##jdbc",
+					"jdbc"
+					);
+			
+			// 3) autocommit 설정하기: true(기본값) / false
+			conn.setAutoCommit(false);
+			
+			// 4) Statement 객체 생성
+			// Statement: 실행할 SQL문을 완전한 문장형태로 만든 후 실행하는 클래스.
+			Statement stmt = conn.createStatement();
+			
+			String name = "한종윤";
+			
+			// 5+6) 쿼리문 전달 후 실행결과값 돌려받기
+			int updateCount = stmt.executeUpdate("insert into member values('user07', 'pass07', '"+name+"', 'M', 'abc@bb.com',"
+					+ "'010-1234-5678', '지구', 99999, sysdate)");
+			
+			// 7) 트랜잭션 처리
+			if (updateCount == 1) {
+				// 1행의 데이터가 정상적으로 삽입되었다면
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+			// 8) 자원반납
+			stmt.close();
+			conn.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void update() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

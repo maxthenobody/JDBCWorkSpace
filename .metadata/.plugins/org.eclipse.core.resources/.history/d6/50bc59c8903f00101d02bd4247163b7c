@@ -1,0 +1,104 @@
+package com.kh.board.model.dao;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
+import java.util.List;
+import java.util.Properties;
+
+import com.kh.board.model.vo.Board;
+
+/** 
+ * Service의 요청에 맞는 sql문을 실행할 클래스.
+ * 단, sql문은 resources/query.xml에 보관/관리한다.
+ * */
+public class BoardDao {
+	private Properties prop = new Properties();
+	
+	public BoardDao() {
+		try {
+			prop.loadFromXML(new FileInputStream("resources/query.xml"));
+		} catch (InvalidPropertiesFormatException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int login(Connection conn, String memberId, String memberPwd) {
+		int selectCount = 0;
+		String sql = prop.getProperty("login");
+		ResultSet rset = null;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPwd);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				selectCount++;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return selectCount;
+	}
+
+	public List<Board> selectBoardList(Connection conn) {
+		List<Board> list = new ArrayList<>();
+		String sql = prop.getProperty("selectBoardList");
+		ResultSet rset = null;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Board b = new Board();
+				
+				// 게시글의 번호, 제목, 작성자, 작성시간 출력
+				b.setBno(rset.getInt("bno"));
+				b.setTitle(rset.getString("title"));
+				b.setWriter(rset.getString("writer"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

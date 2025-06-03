@@ -1,0 +1,6 @@
+package com.kh.view;
+
+// view: 사용자가 보게될 시각적인 요소를 담당.
+public class MemberView {
+	
+}

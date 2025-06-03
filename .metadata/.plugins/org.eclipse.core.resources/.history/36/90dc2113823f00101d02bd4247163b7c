@@ -1,0 +1,2 @@
+insertMember=insert into member values(?, ?, ?, ?, ?, ?, ?, ?, default)
+selectByUserName=select * from member where member_name = ?

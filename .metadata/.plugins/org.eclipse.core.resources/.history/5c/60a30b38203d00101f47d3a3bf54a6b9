@@ -1,0 +1,11 @@
+package com.kh.chap02_crud;
+
+public class Crud {
+	public static void main(String[] args) {
+		Crud c = new Crud();
+	}
+	
+	public void insert() {
+		
+	}
+}

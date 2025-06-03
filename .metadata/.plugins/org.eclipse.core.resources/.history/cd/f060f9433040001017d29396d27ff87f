@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="login">
+		select member_id from member where member_id = ? and member_pwd = ?
+	</entry>
+	<entry key="selectBoardList">
+		<!-- 게시글의 번호, 제목, 작성자, 작성시간 출력 -->
+		select bno, title, writer, create_date from board
+	</entry>
+	<entry key="selectBoard">
+		<!-- 게시글의 번호, 제목, 작성시간 출력 -->
+		select bno, title, create_date from board where bno = ?
+	</entry>
+	<entry key="insertBoard">
+		insert into board(bno, title, content) values(?, ?, ?)
+	</entry>
+	<entry key="getBno">
+		select bno from board
+	</entry>
+	<entry key="updateBoard">
+		update board set content = ? where bno = ?
+	</entry>
+	<entry key="deleteBoard">
+		delete from board where bno = ?
+	</entry>
+</properties>

@@ -1,0 +1,46 @@
+package com.kh.model.dao;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Properties;
+
+import com.kh.model.vo.Member;
+
+/*
+ * DAO(Data Access Object)
+ * - Controller - Service 를 통해서 호출되는 클래스.
+ * - DBMS 서버와 직접 통신하여, SQL문을 실행하고, 실행결과를 반환하는 클래스.
+ * 
+ * */
+public class MemberDao {
+	private Properties prop = new Properties();
+	
+	public MemberDao() {
+		try {
+			prop.load(new FileInputStream("resources/query.properties"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		int updateCount = 0;
+		String sql = prop.getProperty("insertMember");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			updateCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return updateCount;
+	}
+	
+}

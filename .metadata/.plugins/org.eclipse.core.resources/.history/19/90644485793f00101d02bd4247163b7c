@@ -1,0 +1,19 @@
+package com.kh.model.dao;
+
+import java.sql.Connection;
+
+import com.kh.model.vo.Member;
+
+/*
+ * DAO(Data Access Object)
+ * - Controller - Service 를 통해서 호출되는 클래스.
+ * - DBMS 서버와 직접 통신하여, SQL문을 실행하고, 실행결과를 반환하는 클래스.
+ * 
+ * */
+public class MemberDao {
+
+	public int insertMember(Connection conn, Member m) {
+		return 0;
+	}
+	
+}

@@ -1,0 +1,17 @@
+package com.kh.view;
+
+import java.util.Scanner;
+
+import com.kh.controller.MemberController;
+
+// view: 사용자가 보게될 시각적인 요소를 담당.
+public class MemberView {
+	private MemberController mc = new MemberController();
+	private Scanner sc = new Scanner(System.in);
+	
+	public void mainMenu() {
+		
+	}
+	
+	
+}
